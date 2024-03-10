@@ -143,3 +143,53 @@ By combining these imports, you're setting up your Python environment for data a
 ![image](https://github.com/csubham2370/Major-Project-on-Crop-Recommendation-System/assets/144363196/eba97eae-ac3d-48b5-9708-dbc79af69652)
 ![image](https://github.com/csubham2370/Major-Project-on-Crop-Recommendation-System/assets/144363196/38b48777-8cda-49d4-8e45-f85eaa0b7eec)
 ![image](https://github.com/csubham2370/Major-Project-on-Crop-Recommendation-System/assets/144363196/991ca40b-662c-4ac9-9769-61079c8e1bc4)
+
+# Seperating features and target label
+![image](https://github.com/csubham2370/Major-Project-on-Crop-Recommendation-System/assets/144363196/e8004155-fe69-40be-9213-3eb07ef266bd)
+
+
+1. **Defining Features**:
+   - `features = crop2[['N', 'P','K','temperature', 'humidity', 'ph', 'rainfall']]`: This line selects specific columns ('N', 'P', 'K', 'temperature', 'humidity', 'ph', 'rainfall') from the DataFrame `crop2` to be used as features. These features likely represent various characteristics or attributes of crops that will be used to predict the target variable.
+
+2. **Defining Target**:
+   - `target = crop2['label']`: This line selects the 'label' column from the DataFrame `crop2` and assigns it to the variable `target`. This column represents the target variable or the label that you want to predict using the features. Each entry in this column likely corresponds to the type or class of a particular crop.
+
+3. **Defining Labels** (Optional, as it's commented out):
+   - `labels = crop2['label']`: This line is commented out in your code. It selects the 'label' column from the DataFrame `crop2` and assigns it to the variable `labels`. However, since you already assigned the 'label' column to the variable `target`, this line may be redundant.
+
+Overall, this code prepares your data by selecting relevant features and the target variable for use in a machine learning model. The features are the input variables used to make predictions, while the target variable is the output variable you want to predict.
+
+# Initialzing empty lists to append all model's name and corresponding name
+![image](https://github.com/csubham2370/Major-Project-on-Crop-Recommendation-System/assets/144363196/50f3ad6f-896e-461c-b10a-39444b6c7acc)
+
+* This code snippet initializes two empty lists named `acc` and `model`. These lists seem to be intended to store the accuracy scores and corresponding model names, respectively, during the process of evaluating multiple models. Let's break it down:
+
+1. **Accuracy List (`acc`)**:
+   - `acc = []`: This line initializes an empty list named `acc`. This list will be used to store accuracy scores calculated during the evaluation of different models.
+
+2. **Model List (`model`)**:
+   - `model = []`: This line initializes an empty list named `model`. This list will be used to store the names or identifiers of the models being evaluated. 
+
+By initializing these lists, you're setting up a structure to collect and organize the results of model evaluation, likely for comparison or further analysis. As you evaluate different models, you can append their accuracy scores to the `acc` list and their names to the `model` list, allowing you to track and analyze the performance of each model.
+
+# Splitting into train and test data
+![image](https://github.com/csubham2370/Major-Project-on-Crop-Recommendation-System/assets/144363196/d2375c1f-13e8-4e70-9b81-0b4b09b5f491)
+* This code snippet is splitting the data into training and testing sets using scikit-learn's `train_test_split` function. Let's break it down:
+
+1. **Importing `train_test_split` function**:
+   - `from sklearn.model_selection import train_test_split`: This line imports the `train_test_split` function from the `model_selection` module in scikit-learn. This function is used to split the dataset into training and testing sets.
+
+2. **Splitting the Data**:
+   - `Xtrain, Xtest, Ytrain, Ytest = train_test_split(features, target, test_size=0.2, random_state=2)`: This line splits the features (`features`) and target variable (`target`) into training and testing sets. 
+     - `features`: These are the input features used to train the model.
+     - `target`: This is the target variable (labels) that you want to predict.
+     - `test_size=0.2`: This parameter specifies the proportion of the dataset to include in the testing set. Here, it's set to 0.2, indicating that 20% of the data will be used for testing, and the remaining 80% will be used for training.
+     - `random_state=2`: This parameter sets the seed for random number generation. Setting a random seed ensures reproducibility, as the same random split will be generated each time the code is run.
+
+After splitting, the resulting variables are:
+- `Xtrain`: The features for the training set.
+- `Xtest`: The features for the testing set.
+- `Ytrain`: The target variable (labels) for the training set.
+- `Ytest`: The target variable (labels) for the testing set.
+
+These sets are now ready to be used for training and evaluating machine learning models.
