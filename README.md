@@ -489,3 +489,423 @@ print("SVM's Accuracy is: ", x)
 print(classification_report(Ytest, predicted_values))
 ```
 - This line prints a detailed classification report, which includes precision, recall, F1-score, and support for each class, as well as the macro and weighted averages across all classes. This report provides insights into the performance of the classifier for each class label.
+
+# Cross validation score (SVM)
+![image](https://github.com/csubham2370/Major-Project-on-Crop-Recommendation-System/assets/144363196/ab3e3588-4893-4c31-a53c-da106d41fad4)
+* Certainly! Let's break down each line of the code:
+
+```python
+score = cross_val_score(SVM, features, target, cv=5)
+```
+
+1. `score = `: This line initializes a variable named `score` to store the results of the cross-validation scores.
+
+2. `cross_val_score`: This is a function provided by the scikit-learn library (`sklearn.model_selection.cross_val_score`). It is used for cross-validation, which is a technique to evaluate the performance of a machine learning model.
+
+3. `SVM`: This is the Support Vector Machine (SVM) classifier object that you have defined earlier using the `SVC` class. It represents the model that you want to evaluate.
+
+4. `features`: This represents the feature matrix, which contains the input data used for training the classifier.
+
+5. `target`: This represents the target vector, which contains the labels or classes corresponding to each data point in the feature matrix. It indicates what you're trying to predict.
+
+6. `cv=5`: This parameter specifies the number of folds for cross-validation. In this case, it's set to 5, meaning the data will be split into 5 equal parts, and the training/testing process will be repeated 5 times, with each part used as a testing set exactly once.
+
+```python
+score
+```
+
+7. `score`: This line simply prints out the variable `score`, which contains the cross-validation scores calculated in the previous line.
+
+* This code snippet allows you to evaluate the performance of an SVM classifier using 5-fold cross-validation on your dataset. Make sure you have imported necessary libraries (`sklearn.model_selection.cross_val_score` and `sklearn.svm.SVC`) and have defined `features` and `target` appropriately according to your dataset. Adjust the parameters and CV folds as per your requirement.
+
+# Saving trained SVM model
+![image](https://github.com/csubham2370/Major-Project-on-Crop-Recommendation-System/assets/144363196/77f6ef6c-0ea0-463e-8d21-52eadca13148)
+* Certainly! Here's an explanation of each line of the code:
+
+```python
+import pickle
+```
+1. `import pickle`: This line imports the Python `pickle` module, which is used for serializing and deserializing Python objects. In this context, it will be used to save the trained SVM classifier to a file.
+
+```python
+SVM_pkl_filename = '/content/models/SVMClassifier.pkl'
+```
+2. `SVM_pkl_filename = '/content/models/SVMClassifier.pkl'`: This line defines the file path where the trained SVM classifier will be saved. The `.pkl` extension is commonly used for pickle files. Adjust the file path as needed.
+
+```python
+SVM_Model_pkl = open(SVM_pkl_filename, 'wb')
+```
+3. `SVM_Model_pkl = open(SVM_pkl_filename, 'wb')`: This line opens a file stream in binary write mode (`'wb'`) with the file path specified by `SVM_pkl_filename`. It prepares the file to save the trained SVM classifier.
+
+```python
+pickle.dump(SVM, SVM_Model_pkl)
+```
+4. `pickle.dump(SVM, SVM_Model_pkl)`: This line uses the `pickle.dump()` function to serialize and save the trained SVM classifier (`SVM`) to the file stream (`SVM_Model_pkl`). This process converts the classifier object into a byte stream and writes it to the file.
+
+```python
+SVM_Model_pkl.close()
+```
+5. `SVM_Model_pkl.close()`: This line closes the file stream (`SVM_Model_pkl`) after the pickling process is completed. It's important to close the file properly to ensure all data is written and resources are released.
+
+Overall, this code segment demonstrates how to save a trained SVM classifier to a file using the `pickle` module in Python. This allows you to persist the model for later use without needing to retrain it every time. Make sure to replace `SVM` with your actual trained classifier object.
+
+# Logistic Regression
+* Logistic regression is used for binary classification where we use sigmoid function, that takes input as independent variables and produces a probability value between 0 and 1.
+
+* For example, we have two classes Class 0 and Class 1 if the value of the logistic function for an input is greater than 0.5 (threshold value) then it belongs to Class 1 it belongs to Class 0. It’s referred to as regression because it is the extension of linear regression but is mainly used for classification problems.
+![image](https://github.com/csubham2370/Major-Project-on-Crop-Recommendation-System/assets/144363196/8e3f1037-c2b7-4a68-9b45-cc269933800c)
+
+* let's break down each line of the code:
+
+```python
+from sklearn.linear_model import LogisticRegression
+```
+1. `from sklearn.linear_model import LogisticRegression`: This line imports the `LogisticRegression` class from the scikit-learn library. This class is used to create a Logistic Regression model for classification tasks.
+
+```python
+LogReg = LogisticRegression(random_state=2)
+```
+2. `LogReg = LogisticRegression(random_state=2)`: This line initializes a Logistic Regression model with the specified random state (`random_state=2`). The random state is used for reproducibility, ensuring that the same results are obtained each time the model is trained.
+
+```python
+LogReg.fit(Xtrain, Ytrain)
+```
+3. `LogReg.fit(Xtrain, Ytrain)`: This line trains the Logistic Regression model (`LogReg`) on the training data. It fits the model to the feature matrix `Xtrain` and the target vector `Ytrain`, learning the parameters (coefficients) that best fit the data.
+
+```python
+predicted_values = LogReg.predict(Xtest)
+```
+4. `predicted_values = LogReg.predict(Xtest)`: This line uses the trained Logistic Regression model to make predictions on the testing data (`Xtest`). It predicts the class labels for the test samples based on the learned parameters.
+
+```python
+x = metrics.accuracy_score(Ytest, predicted_values)
+acc.append(x)
+model.append('Logistic Regression')
+print("Logistic Regression's Accuracy is: ", x)
+```
+5. `x = metrics.accuracy_score(Ytest, predicted_values)`: This line calculates the accuracy of the Logistic Regression model's predictions by comparing the predicted class labels (`predicted_values`) with the true class labels of the testing data (`Ytest`). The `accuracy_score` function from the `metrics` module in scikit-learn is used for this purpose.
+
+6. `acc.append(x)` and `model.append('Logistic Regression')`: These lines append the accuracy (`x`) and the model name ('Logistic Regression') to lists `acc` and `model`, respectively. This is often done for tracking and comparing the performance of multiple models.
+
+7. `print("Logistic Regression's Accuracy is: ", x)`: This line prints the accuracy of the Logistic Regression model on the testing data.
+
+```python
+print(classification_report(Ytest, predicted_values))
+```
+8. `print(classification_report(Ytest, predicted_values))`: This line prints a detailed classification report, which includes precision, recall, F1-score, and support for each class, as well as the macro and weighted averages across all classes. This report provides insights into the performance of the classifier for each class label.
+
+# Cross validation score (Logistic Regression)
+![image](https://github.com/csubham2370/Major-Project-on-Crop-Recommendation-System/assets/144363196/461c8e64-a5cb-41b7-a644-6f80340cea6b)
+
+* Let's go through each line of the code:
+
+```python
+score = cross_val_score(LogReg, features, target, cv=5)
+```
+1. `score = `: This line initializes a variable named `score` to store the results of the cross-validation scores.
+
+2. `cross_val_score`: This is a function provided by the scikit-learn library (`sklearn.model_selection.cross_val_score`). It is used for cross-validation, which is a technique to evaluate the performance of a machine learning model.
+
+3. `LogReg`: This is the Logistic Regression model that you've previously trained and initialized using scikit-learn's `LogisticRegression` class.
+
+4. `features`: This represents the feature matrix, which contains the input data used for training the classifier.
+
+5. `target`: This represents the target vector, which contains the labels or classes corresponding to each data point in the feature matrix. It indicates what you're trying to predict.
+
+6. `cv=5`: This parameter specifies the number of folds for cross-validation. In this case, it's set to 5, meaning the data will be split into 5 equal parts, and the training/testing process will be repeated 5 times, with each part used as a testing set exactly once.
+
+```python
+score
+```
+7. `score`: This line simply prints out the variable `score`, which contains the cross-validation scores calculated in the previous line.
+
+* This code snippet allows you to evaluate the performance of a Logistic Regression classifier using 5-fold cross-validation on your dataset. Make sure you have imported necessary libraries (`sklearn.model_selection.cross_val_score` and `sklearn.linear_model.LogisticRegression`). Adjust the parameters and CV folds as per your requirement.
+
+# Saving trained Logistic Regression model
+![image](https://github.com/csubham2370/Major-Project-on-Crop-Recommendation-System/assets/144363196/e5dea328-c9c7-4b8d-a2e9-041abdb7d959)
+
+* Certainly! Let's break down each line of the code:
+
+```python
+import pickle
+```
+1. `import pickle`: This line imports the Python `pickle` module, which is used for serializing and deserializing Python objects. In this context, it will be used to save the trained Logistic Regression classifier to a file.
+
+```python
+LR_pkl_filename = '/content/models/LogisticRegression.pkl'
+```
+2. `LR_pkl_filename = '/content/models/LogisticRegression.pkl'`: This line defines the file path where the trained Logistic Regression classifier will be saved. The `.pkl` extension is commonly used for pickle files. Adjust the file path as needed.
+
+```python
+LR_Model_pkl = open(LR_pkl_filename, 'wb')
+```
+3. `LR_Model_pkl = open(LR_pkl_filename, 'wb')`: This line opens a file stream in binary write mode (`'wb'`) with the file path specified by `LR_pkl_filename`. It prepares the file to save the trained Logistic Regression classifier.
+
+```python
+pickle.dump(LogReg, LR_Model_pkl)
+```
+4. `pickle.dump(LogReg, LR_Model_pkl)`: This line uses the `pickle.dump()` function to serialize and save the trained Logistic Regression classifier (`LogReg`) to the file stream (`LR_Model_pkl`). This process converts the classifier object into a byte stream and writes it to the file.
+
+```python
+LR_Model_pkl.close()
+```
+5. `LR_Model_pkl.close()`: This line closes the file stream (`LR_Model_pkl`) after the pickling process is completed. It's important to close the file properly to ensure all data is written and resources are released.
+
+* Overall, this code segment demonstrates how to save a trained Logistic Regression classifier to a file using the `pickle` module in Python. This allows you to persist the model for later use without needing to retrain it every time. Make sure to replace `LogReg` with your actual trained classifier object.
+
+# Random Forest
+* Random Forest is a popular machine learning algorithm that belongs to the supervised learning technique. It can be used for both Classification and Regression problems in ML. It is based on the concept of ensemble learning, which is a process of combining multiple classifiers to solve a complex problem and to improve the performance of the model.
+
+* As the name suggests, "Random Forest is a classifier that contains a number of decision trees on various subsets of the given dataset and takes the average to improve the predictive accuracy of that dataset." Instead of relying on one decision tree, the random forest takes the prediction from each tree and based on the majority votes of predictions, and it predicts the final output.
+
+* The greater number of trees in the forest leads to higher accuracy and prevents the problem of overfitting.
+
+![image](https://github.com/csubham2370/Major-Project-on-Crop-Recommendation-System/assets/144363196/5e6f6685-be49-40ff-9d62-8ff3e1b173fd)
+
+* Certainly! Here's an explanation of each line of the code:
+
+```python
+from sklearn.ensemble import RandomForestClassifier
+```
+1. `from sklearn.ensemble import RandomForestClassifier`: This line imports the `RandomForestClassifier` class from the scikit-learn library. Random Forest is an ensemble learning method that fits a number of decision tree classifiers on various sub-samples of the dataset and uses averaging to improve the predictive accuracy and control over-fitting.
+
+```python
+RF = RandomForestClassifier(n_estimators=20, random_state=0)
+```
+2. `RF = RandomForestClassifier(n_estimators=20, random_state=0)`: This line initializes a Random Forest classifier (`RF`) with 20 decision trees (`n_estimators=20`) and sets the random state to 0 (`random_state=0`). Setting the random state ensures reproducibility of the results.
+
+```python
+RF.fit(Xtrain,Ytrain)
+```
+3. `RF.fit(Xtrain,Ytrain)`: This line trains the Random Forest classifier (`RF`) on the training data. It fits the model to the feature matrix `Xtrain` and the target vector `Ytrain`, learning the decision boundaries to classify the data.
+
+```python
+predicted_values = RF.predict(Xtest)
+```
+4. `predicted_values = RF.predict(Xtest)`: This line uses the trained Random Forest classifier to make predictions on the testing data (`Xtest`). It predicts the class labels for the test samples based on the learned decision boundaries.
+
+```python
+x = metrics.accuracy_score(Ytest, predicted_values)
+```
+5. `x = metrics.accuracy_score(Ytest, predicted_values)`: This line calculates the accuracy of the Random Forest classifier's predictions by comparing the predicted class labels (`predicted_values`) with the true class labels of the testing data (`Ytest`). The `accuracy_score` function from the `metrics` module in scikit-learn is used for this purpose.
+
+```python
+acc.append(x)
+```
+6. `acc.append(x)`: This line appends the accuracy (`x`) to the list `acc`. This is often done for tracking and comparing the performance of multiple models.
+
+```python
+model.append('RF')
+```
+7. `model.append('RF')`: This line appends the name of the model ('RF' for Random Forest) to the list `model`. This is also done for tracking and comparing the performance of multiple models.
+
+```python
+print("RF's Accuracy is: ", x)
+```
+8. `print("RF's Accuracy is: ", x)`: This line prints the accuracy of the Random Forest classifier on the testing data.
+
+```python
+print(classification_report(Ytest,predicted_values))
+```
+9. `print(classification_report(Ytest,predicted_values))`: This line prints a detailed classification report, which includes precision, recall, F1-score, and support for each class, as well as the macro and weighted averages across all classes. This report provides insights into the performance of the classifier for each class label.
+
+# Cross validation score (Random Forest)
+![image](https://github.com/csubham2370/Major-Project-on-Crop-Recommendation-System/assets/144363196/fb5ab3eb-75db-4def-9e25-8503e70654f8)
+
+* Let's break down each line of code:
+
+```python
+score = cross_val_score(RF, features, target, cv=5)
+```
+
+1. `score = `: This line initializes a variable named `score` to store the results of the cross-validation scores.
+
+2. `cross_val_score`: This function, provided by scikit-learn (`sklearn.model_selection.cross_val_score`), is used for cross-validation. It evaluates the performance of the RandomForestClassifier model (`RF`) using cross-validation.
+
+3. `RF`: This is the RandomForestClassifier model that you've previously initialized and trained using scikit-learn's `RandomForestClassifier` class.
+
+4. `features`: This represents the feature matrix, which contains the input data used for training the classifier.
+
+5. `target`: This represents the target vector, which contains the labels or classes corresponding to each data point in the feature matrix. It indicates what you're trying to predict.
+
+6. `cv=5`: This parameter specifies the number of folds for cross-validation. In this case, it's set to 5, meaning the data will be split into 5 equal parts, and the training/testing process will be repeated 5 times, with each part used as a testing set exactly once.
+
+```python
+score
+```
+
+7. `score`: This line simply prints out the variable `score`, which contains the cross-validation scores calculated in the previous line.
+
+* This code snippet allows you to evaluate the performance of a RandomForestClassifier model using 5-fold cross-validation on your dataset. Make sure you have imported necessary libraries (`sklearn.model_selection.cross_val_score` and `sklearn.ensemble.RandomForestClassifier`). Adjust the parameters and CV folds as per your requirement.
+
+# Saving trained Random Forest model
+
+![image](https://github.com/csubham2370/Major-Project-on-Crop-Recommendation-System/assets/144363196/e8580e05-fff3-43bb-b22c-c6efad8c73f9)
+
+* Let's break down each line of the code:
+
+```python
+import pickle
+```
+1. `import pickle`: This line imports the Python `pickle` module, which is used for serializing and deserializing Python objects. In this context, it will be used to save the trained RandomForestClassifier to a file.
+
+```python
+RF_pkl_filename = '/content/models/RandomForest.pkl'
+```
+2. `RF_pkl_filename = '/content/models/RandomForest.pkl'`: This line defines the file path where the trained RandomForestClassifier will be saved. The `.pkl` extension is commonly used for pickle files. Adjust the file path as needed.
+
+```python
+RF_Model_pkl = open(RF_pkl_filename, 'wb')
+```
+3. `RF_Model_pkl = open(RF_pkl_filename, 'wb')`: This line opens a file stream in binary write mode (`'wb'`) with the file path specified by `RF_pkl_filename`. It prepares the file to save the trained RandomForestClassifier.
+
+```python
+pickle.dump(RF, RF_Model_pkl)
+```
+4. `pickle.dump(RF, RF_Model_pkl)`: This line uses the `pickle.dump()` function to serialize and save the trained RandomForestClassifier (`RF`) to the file stream (`RF_Model_pkl`). This process converts the classifier object into a byte stream and writes it to the file.
+
+```python
+RF_Model_pkl.close()
+```
+5. `RF_Model_pkl.close()`: This line closes the file stream (`RF_Model_pkl`) after the pickling process is completed. It's important to close the file properly to ensure all data is written and resources are released.
+
+* Overall, this code segment demonstrates how to save a trained RandomForestClassifier to a file using the `pickle` module in Python. This allows you to persist the model for later use without needing to retrain it every time. Make sure to replace `RF` with your actual trained classifier object.
+
+# Accuracy Comparison
+![image](https://github.com/csubham2370/Major-Project-on-Crop-Recommendation-System/assets/144363196/93ce0e2a-ee5e-4fbe-8bb1-95b5216d27f0)
+
+* This code snippet is using Matplotlib and Seaborn libraries to create a bar plot that compares the accuracy of different algorithms. Let's break down each line of the code:
+
+```python
+plt.figure(figsize=[10,5], dpi=100)
+```
+1. `plt.figure(figsize=[10,5], dpi=100)`: This line creates a new figure with a specific size (10 inches in width and 5 inches in height) and a specified DPI (dots per inch) for better resolution. This sets up the canvas for plotting.
+
+```python
+plt.title('Accuracy Comparison')
+```
+2. `plt.title('Accuracy Comparison')`: This line sets the title of the plot to "Accuracy Comparison".
+
+```python
+plt.xlabel('Accuracy')
+plt.ylabel('Algorithm')
+```
+3. `plt.xlabel('Accuracy')` and `plt.ylabel('Algorithm')`: These lines set the labels for the x-axis and y-axis respectively. In this case, 'Accuracy' is set as the label for the x-axis and 'Algorithm' is set as the label for the y-axis.
+
+```python
+sns.barplot(x=acc, y=model, palette='dark')
+```
+4. `sns.barplot(x=acc, y=model, palette='dark')`: This line creates a bar plot using Seaborn's `barplot` function. It takes `acc` as the values for the x-axis (accuracy scores) and `model` as the values for the y-axis (names of the algorithms). The `palette` parameter sets the color palette for the bars. Here, 'dark' palette is chosen.
+
+* Please ensure you have imported the required libraries (`import matplotlib.pyplot as plt` and `import seaborn as sns`) before using this code. Also, make sure that `acc` and `model` lists are populated with accuracy scores and algorithm names respectively.
+
+![image](https://github.com/csubham2370/Major-Project-on-Crop-Recommendation-System/assets/144363196/041c2071-82f8-49bf-bbfc-5ef771fb6544)
+
+* This code creates a dictionary `accuracy_models` where the keys are the names of the algorithms (`model`) and the values are the corresponding accuracy scores (`acc`). Then, it iterates over the dictionary items and prints each algorithm along with its accuracy score. Let's break down each line:
+
+```python
+accuracy_models = dict(zip(model, acc))
+```
+1. This line uses the `zip` function to combine the elements of `model` and `acc` lists pairwise, creating tuples where the algorithm name is paired with its accuracy score. Then, `dict()` converts this sequence of tuples into a dictionary, where algorithm names are keys and accuracy scores are values. This creates the `accuracy_models` dictionary.
+
+```python
+for k, v in accuracy_models.items():
+```
+2. This line starts a loop over the items of the `accuracy_models` dictionary, where `k` represents the key (algorithm name) and `v` represents the value (accuracy score).
+
+```python
+print(k, '-->', v)
+```
+3. Inside the loop, this line prints the algorithm name (`k`), followed by an arrow (`-->`), and then the accuracy score (`v`). This line prints each algorithm name along with its corresponding accuracy score.
+
+* This code provides a simple and readable way to display the accuracy scores of different algorithms. It's particularly useful for comparing the performance of multiple models. Make sure that `model` and `acc` lists are properly populated with algorithm names and accuracy scores respectively.
+
+# Making a prediction
+![image](https://github.com/csubham2370/Major-Project-on-Crop-Recommendation-System/assets/144363196/80669361-5a97-4927-865e-b37f15053429)
+
+* This code snippet seems to be making a prediction using a RandomForestClassifier model (`RF`). Let's break down each line:
+
+```python
+data = np.array([[101,87,54,29,76,6.3,100]])
+```
+1. This line creates a NumPy array `data` containing a single data point for prediction. The data point consists of features such as 101, 87, 54, 29, 76, 6.3, and 100. This array is structured as a 2D array with a single row and multiple columns.
+
+```python
+prediction = RF.predict(data)[0]
+```
+2. This line uses the trained RandomForestClassifier model (`RF`) to make a prediction on the provided data point (`data`). The `predict()` method returns an array of predicted class labels, and `[0]` is used to access the first (and only) element of this array, which represents the predicted class label for the single data point.
+
+```python
+print("{} is a best crop to be cultivated. ".format(prediction))
+```
+3. Finally, this line prints the prediction result. It uses string formatting to insert the predicted class label into the string template. The predicted class label is printed along with the message "is a best crop to be cultivated."
+
+* Make sure that the features in the `data` array correspond to the features used during training of the RandomForestClassifier model. Also, ensure that the `RF` model has been trained and is capable of making accurate predictions.
+
+# Creating a Funcation
+![image](https://github.com/csubham2370/Major-Project-on-Crop-Recommendation-System/assets/144363196/90bbc7e2-b349-4729-806e-93389eca4a61)
+
+* This Python function `recommendation` seems to be designed to make crop recommendations based on certain features using a RandomForestClassifier model (`RF`). Let's break down the function:
+
+```python
+def recommendation(N, P, k, temperature, humidity, ph, rainfal):
+```
+1. This line defines a function named `recommendation` that takes seven parameters:
+   - `N`: Nitrogen content in the soil
+   - `P`: Phosphorus content in the soil
+   - `k`: Potassium content in the soil
+   - `temperature`: Temperature
+   - `humidity`: Humidity
+   - `ph`: pH value of the soil
+   - `rainfal`: Rainfall in mm
+
+```python
+features = np.array([[N, P, k, temperature, humidity, ph, rainfal]])
+```
+2. This line creates a NumPy array `features` containing a single data point for prediction. The data point consists of the features provided as function arguments. It is structured as a 2D array with a single row and seven columns.
+
+```python
+prediction = RF.predict(features)[0]
+```
+3. This line uses the trained RandomForestClassifier model (`RF`) to make a prediction on the provided data point (`features`). The `predict()` method returns an array of predicted class labels, and `[0]` is used to access the first (and only) element of this array, which represents the predicted class label for the single data point.
+
+```python
+return prediction
+```
+4. Finally, this line returns the prediction result from the function.
+
+* This function is designed to take certain soil and weather parameters as input and predict the recommended crop using the trained RandomForestClassifier model (`RF`). Make sure that the features passed to this function are properly scaled and formatted to match the features used during training of the `RF` model. Additionally, ensure that the `RF` model has been trained and is capable of making accurate predictions.
+
+![image](https://github.com/csubham2370/Major-Project-on-Crop-Recommendation-System/assets/144363196/771a2f32-eee1-486a-985e-e71b4c693842)
+
+* The provided code snippet calls the `recommendation` function with certain values for soil and weather parameters and prints out the predicted crop. Let's go through it:
+
+```python
+N = 2
+P = 123
+k = 198
+temperature = 39.64
+humidity = 82.21
+ph = 6.25
+rainfall = 70.39
+```
+1. These lines assign specific values to variables representing soil and weather parameters:
+   - `N`: Nitrogen content in the soil
+   - `P`: Phosphorus content in the soil
+   - `k`: Potassium content in the soil
+   - `temperature`: Temperature
+   - `humidity`: Humidity
+   - `ph`: pH value of the soil
+   - `rainfall`: Rainfall in mm
+
+```python
+predict = recommendation(N,P,k,temperature,humidity,ph,rainfall)
+```
+2. This line calls the `recommendation` function with the provided values for soil and weather parameters. It passes these values as arguments to the function.
+
+```python
+print("{} is a best crop to be cultivated. ".format(predict))
+```
+3. Finally, this line prints out the result of the recommendation. It formats the output string with the predicted crop obtained from the `recommendation` function.
+
+* This code snippet effectively uses the `recommendation` function to predict the best crop to be cultivated based on the provided soil and weather parameters and prints out the recommendation. Make sure that the `recommendation` function is properly defined and that the RandomForestClassifier model (`RF`) it uses has been trained and is capable of making accurate predictions.
