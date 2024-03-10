@@ -214,6 +214,7 @@ These sets are now ready to be used for training and evaluating machine learning
 7. **Model Evaluation**: The trained decision tree model is evaluated using performance metrics such as accuracy, precision, recall, F1-score, or ROC curve depending on the nature of the classification problem.
 
 * This training process results in a decision tree model capable of making predictions on unseen data based on the learned patterns from the training data.
+  
 ![image](https://github.com/csubham2370/Major-Project-on-Crop-Recommendation-System/assets/144363196/9ea0f0a7-8559-4e91-b6fd-f85126a0103a)
 ![image](https://github.com/csubham2370/Major-Project-on-Crop-Recommendation-System/assets/144363196/13bc5800-cb35-42bd-b51f-a6a8db403103)
 * let's break down each line of the code:
@@ -435,3 +436,56 @@ NB_Model_pkl.close()
 5. This line closes the file object (`NB_Model_pkl`) after the pickling process is complete. It's important to close the file to ensure that all the data is properly written and resources are released.
 
 * Overall, these lines of code demonstrate how to serialize (pickle) a trained Naive Bayes classifier using Python's `pickle` module and save it to a file for later use.
+# Support Vector Machine (SVM)
+* Support Vector Machine or SVM is one of the most popular Supervised Learning algorithms, which is used for Classification as well as Regression problems. However, primarily, it is used for Classification problems in Machine Learning.
+
+![image](https://github.com/csubham2370/Major-Project-on-Crop-Recommendation-System/assets/144363196/32f94964-b18f-4a2b-81d3-5069de4b8532)
+
+* This code snippet demonstrates the usage of Support Vector Machine (SVM) for classification using the scikit-learn library in Python. Let's break down each line:
+
+```python
+from sklearn.svm import SVC
+```
+- This imports the Support Vector Classification (SVC) class from the scikit-learn library. SVC is used for classification tasks using Support Vector Machines.
+
+```python
+from sklearn.preprocessing import MinMaxScaler
+```
+- This imports the MinMaxScaler class from scikit-learn, which is used for scaling features to a range. Scaling features is often necessary before applying SVM to ensure that all features contribute equally to the decision process.
+
+```python
+norm = MinMaxScaler().fit(Xtrain)
+X_train_norm = norm.transform(Xtrain)
+X_test_norm = norm.transform(Xtest)
+```
+- These lines perform data normalization using Min-Max scaling. The `MinMaxScaler` is fitted on the training data (`Xtrain`) to learn the minimum and maximum values of each feature. Then, it transforms both the training and testing data to scale them within the specified range (by default, between 0 and 1).
+
+```python
+SVM = SVC(kernel='poly', degree=3, C=1)
+```
+- This initializes an SVM classifier object (`SVM`) using the SVC class. The classifier is configured with a polynomial kernel (`kernel='poly'`), a polynomial degree of 3 (`degree=3`), and a regularization parameter (`C=1`). 
+
+```python
+SVM.fit(X_train_norm, Ytrain)
+```
+- This line fits the SVM classifier to the normalized training data (`X_train_norm`, `Ytrain`). The classifier learns the optimal decision boundary to separate the classes based on the provided training data.
+
+```python
+predicted_values = SVM.predict(X_test_norm)
+```
+- This line uses the trained SVM classifier to make predictions on the normalized testing data (`X_test_norm`). It predicts the class labels for the test samples.
+
+```python
+x = metrics.accuracy_score(Ytest, predicted_values)
+```
+- This line calculates the accuracy of the SVM classifier's predictions by comparing the predicted class labels (`predicted_values`) with the true class labels of the testing data (`Ytest`). The `accuracy_score` function from the `metrics` module in scikit-learn is used for this purpose.
+
+```python
+print("SVM's Accuracy is: ", x)
+```
+- This line prints the accuracy of the SVM classifier on the testing data.
+
+```python
+print(classification_report(Ytest, predicted_values))
+```
+- This line prints a detailed classification report, which includes precision, recall, F1-score, and support for each class, as well as the macro and weighted averages across all classes. This report provides insights into the performance of the classifier for each class label.
