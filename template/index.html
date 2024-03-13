@@ -57,6 +57,7 @@
        input[type="submit"]:hover {
            background-color: #45a049;
        }
+      
 
        .navbar .navbar-nav .nav-link {
   color:dodgerblue /* Change the color code to your desired color */
@@ -72,9 +73,12 @@
     color: #45a049;
   }
   .navbar .navbar-nav .nav-link {
-    font-size: 18px;
+    font-size: 28px;
   }
-      
+  .navbar h1{
+    color: #45a049;
+  }
+ 
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -94,6 +98,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="#">About</a>
               </li>
+              <h1><marquee>Crop Recommendation System using Machine Learning with Python</marquee></h1>
             </ul>
           </div>
         </div>
@@ -101,7 +106,7 @@
 
     <div class="container1">
         <h1>Crop Recommendation</h1>
-        <form id="recommendationForm">
+        <form id="recommendationForm" action="/predict" method="POST">
             <label for="N">Nitrogen (N):</label>
             <input type="number" id="Nitrogen" name="Nitrogen" placeholder="Enter Nitrogen" class="form-control" required step="0">
 
@@ -127,35 +132,15 @@
         </form>
 
         {% if result %}
-		<div class="card bg-dark" style="width: 18rem;">
+		<div class="card bg-white" style="width: 18rem;">
 
 		  <div class="card-body">
-			<h5 class="card-title" color="green">Recommend Crop for cultivation is:</h5>
+			<h5 class="card-title">Recommend Crop for cultivation is:</h5>
 			<p class="card-text">{{ result }}</p>
 		  </div>
 		</div>
 	   {% endif %}
   </div>
-    <script>
-        document.getElementById("recommendationForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent the form from submitting
-            var form = this;
-            var formData = new FormData(form);
-
-            fetch("/recommendation", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById("result").textContent = "Recommended crop: " + data.crop;
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                document.getElementById("result").textContent = "An error occurred. Please try again later.";
-            });
-        });
-    </script>
 
 <div class="container2">
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
