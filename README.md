@@ -909,3 +909,4 @@ print("{} is a best crop to be cultivated. ".format(predict))
 3. Finally, this line prints out the result of the recommendation. It formats the output string with the predicted crop obtained from the `recommendation` function.
 
 * This code snippet effectively uses the `recommendation` function to predict the best crop to be cultivated based on the provided soil and weather parameters and prints out the recommendation. Make sure that the `recommendation` function is properly defined and that the RandomForestClassifier model (`RF`) it uses has been trained and is capable of making accurate predictions.
+
