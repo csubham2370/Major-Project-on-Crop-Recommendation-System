@@ -1,5 +1,6 @@
 # Major-Project-on-Crop-Recommendation-System
 This is our MCA Major Project
+* Our Project website link: https://nitro1234.pythonanywhere.com/
 
 ## Here we explain our Crop Recommendation System.ipynb file.
 ![image](https://github.com/csubham2370/Major-Project-on-Crop-Recommendation-System/assets/144363196/4188539c-1623-4928-b1ed-384682c2d06c)
