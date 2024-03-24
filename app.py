@@ -37,6 +37,6 @@ def predict():
     return render_template('index.html',result = result)
 
 
-# python main
-if __name__ == "__main__":
-    app.run(debug=False)
+# # python main
+# if __name__ == "__main__":
+#     app.run(debug=False)
