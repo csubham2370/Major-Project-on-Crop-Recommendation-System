@@ -36,7 +36,7 @@ Pygments==2.17.2
 pypiwin32==223
 python-dateutil==2.8.2
 pytz==2024.1
-
+pywin32==306
 pyzmq==25.1.2
 scikit-learn==1.2.2
 scipy==1.12.0
